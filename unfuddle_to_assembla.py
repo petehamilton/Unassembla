@@ -90,6 +90,7 @@ class UnfuddleToAssembla:
 		try:
 			return assembla_milestones[unfuddle_milestones[milestoneID]]
 		except: #Milestone doesn't exist
+			assembla_milestone = {}
 			unfuddle_milestone = UH.getMilestone(milestoneID)
 			assembla_milestone['title'] = unfuddle_milestone['title']
 			assembla_milestone['description'] = unfuddle_milestone['description']
