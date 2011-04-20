@@ -7,7 +7,7 @@ import sys
 sys.path.append('python-rest-client')
 from restful_lib import Connection
 
-import settings
+from settings import *
 
 UH = UnfuddleHelper(unfuddle_subdomain,unfuddle_project_id,unfuddle_username,unfuddle_password)
 AH = AssemblaHelper(assembla_space,assembla_username,assembla_password)
