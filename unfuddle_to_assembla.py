@@ -18,15 +18,19 @@ URC = Connection("http://"+unfuddle_subdomain+".unfuddle.com/api/v1/projects/"+u
 ticket_map = {}
 
 class UnfuddleToAssembla:
-	
+
 	def main(self):
+		print user_map
 		uts = UH.getTickets()
 		print uts
 		# for t in uts:
 		# 	ARC.request_delete('tickets/'+t['number'])
 		# 	print "Copying ticket #" + t['number']
 		# 	self.convertAndSave(t)
-
+		
+	if __name__ == "__main__":
+		main(0)
+		
 	def convertAndSave(self,unfuddle_ticket):
 		assembla_ticket = {}
 		assembla_ticket['number'] = unfuddle_ticket['number']
@@ -103,4 +107,3 @@ class UnfuddleToAssembla:
 			assembla_milestone['user-id'] = self.mapUser(unfuddle_milestone['person-responsible'])
 			m = AH.createMilestone(assembla_milestone)
 			return m['id']
-
