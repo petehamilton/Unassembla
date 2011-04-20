@@ -1,10 +1,13 @@
-unfuddle_subdomain = ''
-unfuddle_project_id = ''
-unfuddle_username = ''
-unfuddle_password = ''
+unfuddle_subdomain = 'inspiredpixel'
+unfuddle_project_id = '1'
+unfuddle_username = 'peterh'
+unfuddle_password = 'divine1618'
 
-assembla_space = ''
-assembla_username = ''
-assembla_password = ''
+assembla_space = 'online360survey'
+assembla_username = 'peterhamilton'
+assembla_password = 'divine'
 
-user_map = {'unfuddleuser':'assemblauser'}
+user_map = {'peterh':'peterhamilton',
+			'jeremyh':'jeremyhamilton',
+			'aliceh':'alicehamilton',
+			'olas':'olasteadman'}
