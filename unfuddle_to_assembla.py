@@ -20,8 +20,12 @@ ticket_map = {}
 class UnfuddleToAssembla:
 
 	def convert(self):
+		# t = UH.getTicket(154)
+		# ARC.request_delete('tickets/' + t['number'])
+		# self.convertAndSave(t)
 		uts = UH.getTickets()
 		for t in uts:
+			ARC.request_delete('tickets/' + t['number'])
 			print "Copying ticket #" + t['number']
 			self.convertAndSave(t)
 		
@@ -37,14 +41,16 @@ class UnfuddleToAssembla:
 
 		assembla_ticket['status'] = unfuddle_ticket['status']
 		
-		#Map across
+		#Map across users
 		assembla_ticket['acts-as-user-id'] = self.mapUser(unfuddle_ticket['reporter-id'])
 		assembla_ticket['assigned-to-id'] = self.mapUser(unfuddle_ticket['assignee-id'])
 		
 		#Create/link with milestones
-		if unfuddle_ticket['milestone-id']:
-			assembla_ticket['milestone-id'] = self.copyMilestone(unfuddle_ticket['milestone-id'])
-		
+		try:
+			if unfuddle_ticket['milestone-id']:
+				assembla_ticket['milestone-id'] = self.copyMilestone(unfuddle_ticket['milestone-id'])
+		except:
+			pass
 		#If component exists, map, otherwise blank
 		assembla_ticket['component-id'] = None
 		
