@@ -19,17 +19,11 @@ ticket_map = {}
 
 class UnfuddleToAssembla:
 
-	def main(self):
-		print user_map
+	def convert(self):
 		uts = UH.getTickets()
-		print uts
-		# for t in uts:
-		# 	ARC.request_delete('tickets/'+t['number'])
-		# 	print "Copying ticket #" + t['number']
-		# 	self.convertAndSave(t)
-		
-	if __name__ == "__main__":
-		main(0)
+		for t in uts:
+			print "Copying ticket #" + t['number']
+			self.convertAndSave(t)
 		
 	def convertAndSave(self,unfuddle_ticket):
 		assembla_ticket = {}
@@ -72,7 +66,6 @@ class UnfuddleToAssembla:
 				assembla_ticket['updated-at'] = comment['updated-at']
 				assembla_ticket['acts-as-user-id'] = self.mapUser(unfuddle_ticket['reporter-id'])
 				xml = AH.createTicketXML(assembla_ticket)
-				print "updating"
 				AH.updateTicketXML(new_ticket['id'],xml)
 			#Add resolution as a comment
 			assembla_ticket['user-comment'] = unfuddle_ticket['resolution-description']
@@ -107,3 +100,5 @@ class UnfuddleToAssembla:
 			assembla_milestone['user-id'] = self.mapUser(unfuddle_milestone['person-responsible'])
 			m = AH.createMilestone(assembla_milestone)
 			return m['id']
+
+UnfuddleToAssembla().convert()
