@@ -95,7 +95,6 @@ class AssemblaHelper:
 		for k,v in args.items():
 			xml += '<'+k+'>'+v+'</'+k+'>'
 		xml += '</milestone>'
-		print xml
 		response = self.RC.request_post('/milestones',body=xml)
 		return self.parseMilestone(response['body'])
 		

@@ -20,12 +20,8 @@ ticket_map = {}
 class UnfuddleToAssembla:
 
 	def convert(self):
-		# t = UH.getTicket(154)
-		# ARC.request_delete('tickets/' + t['number'])
-		# self.convertAndSave(t)
 		uts = UH.getTickets()
 		for t in uts:
-			ARC.request_delete('tickets/' + t['number'])
 			print "Copying ticket #" + t['number']
 			self.convertAndSave(t)
 		
@@ -103,8 +99,10 @@ class UnfuddleToAssembla:
 			assembla_milestone['created-at'] = unfuddle_milestone['created-at']
 			assembla_milestone['updated-at'] = unfuddle_milestone['updated-at']
 			assembla_milestone['due-date'] = unfuddle_milestone['due-on']
-			assembla_milestone['completed'] = unfuddle_milestone['completed']
-			assembla_milestone['user-id'] = self.mapUser(unfuddle_milestone['person-responsible'])
+			assembla_milestone['is-completed'] = unfuddle_milestone['completed']
+			userid = self.mapUser(unfuddle_milestone['person-responsible-id'])
+			if userid != None:
+				assembla_milestone['user-id'] = userid
 			m = AH.createMilestone(assembla_milestone)
 			return m['id']
 
